@@ -1,0 +1,20 @@
+1) This:
+https://stackoverflow.com/questions/572897/how-does-javascript-prototype-work
+
+has a good explanation of prototype, etc and why it's confusing to people.
+
+2) If you create an object from a constructor like this:
+myInstance = new MyClass
+and then JSON.stringify(myInstance) and send the JSONified
+myInstance to localStorage then later retrieve it (after
+JSON.parse()) 
+The prototype chain of myInstance gets lost (as you might expect
+because JSON.stringify() simply converts stuff to JSON format).
+So you have to reconnect myInstance to MyClass to 
+reconnect the prototype chain.
+The only way I could work out how to do this was: 
+newInstance = new MyClass
+newInstance.title  = myInstance.title 
+newInstance.author = myInstance.author
+etc
+This is clunky!

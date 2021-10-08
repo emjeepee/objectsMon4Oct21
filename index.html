@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="./js-file.js" defer></script>
+    <link rel="stylesheet" href="./styles.css">
+    <meta charset="utf-8">
+
+    <title>Library</title>
+
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="./styles.css">
+    
+    <!-- For the Google fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Limelight&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+
+  </head>
+
+<body> 
+
+<div class = "outerDiv"> <!--First the all-containing div for the table -->
+
+<div class = "libraryHeader"> <!--The header div -->
+<p class = "libHeadText">
+  Library
+</p>
+
+</div>  <!--End the header div -->
+
+<div class ="addButton"> <!-- the add buttin (div) -->
+<p class = "addPara">
+  New book
+</p>
+</div>
+
+<div class = "tableDiv">
+<table id = "theTable">  <!-- the table -->
+
+  <thead>
+  <tr>
+    <th class = "titleAuthorTh">Title</th>
+    <th class = "titleAuthorTh">Author</th>
+    <th class = "pagesReadTh">Pages</th>
+    <th class = "pagesReadTh">Read?</th>
+    
+    <th class = "buttonTh">Flip read status</th>
+    <th class = "buttonTh">Dump</th>
+    </tr>
+  </thead>
+  <tbody id = "tableBody">   <!-- rows appended to this element dynamically -->
+
+  </tbody>
+ 
+</table>  <!-- end the table -->
+</div>
+
+
+</div> <!--end the all-containing div -->
+<!-- -->
+
+
+
+
+
+<!-- NOW FOR error DIALOG BOX zero -->
+<!-- This tells user that a book 
+  of that name is already in the library-->
+<div id = "dialogBoxID"
+class = "dialogBoxVanish"> <!-- div for error dialog box -->
+<p class = "erroMessage">
+This book is already in the library
+</p>
+
+
+</div> <!-- end div for error dialog box -->
+
+
+<!-- NOW FOR error DIALOG BOX one-->
+<!-- This tells user to enter text 
+  in all fields-->
+  <div id = "dialogBoxID1"
+  class = "dialogBoxVanish1"> <!-- div for error dialog box -->
+  <p class = "erroMessage">
+  Fill all fields
+  </p>
+  
+  
+  </div> <!-- end div for error dialog box -->
+  
+  
+
+
+
+
+
+
+
+
+
+<!-- NOW FOR THE FORM -->
+<!-- First an all-enclosing div
+that has an SS background image -->
+<div id = "formDivID"     
+class = "formDiv formDivVanish">
+  <form class="form">
+
+    <label class = "titleLabel">Title</label>
+    <input class="titleInput" type="text">
+    
+    <label class = "authorLabel">Author</label>
+    <input class="authorInput" type="text">
+
+    <label class = "pagesLabel">No of pages</label>
+    <input class="pagesInput" type="number">
+    </form>
+
+    <!-- The submit button -->
+<div class = "submitDiv">
+  <p class = "submitPara">
+  Submit
+</p>
+</div>
+
+    <!-- The close button -->
+<div class = "closeDiv">
+  <p class = "closePara">
+  Close
+</p>
+</div>
+
+
+
+</div>
+
+
+
+
+
+<!--TEST AREA  TEST AREA  TEST AREA  TEST AREA  TEST AREA -->
+<div class = "testButton"> <!-- a test button -->
+  <p class = "tenBooksPara">
+    Reset localStorage with 10 books
+  </p>
+</div> <!-- End the test button -->
+
+<div class = "testButton1"> <!-- a test button -->
+  <p class = "toastPara">
+    Simply toast local storage
+  </p>
+</div> <!-- End the test button -->
+
+<!-- a test button -->
+<!-- 
+<div class = "testButton2"> 
+  <p>
+    Not yet used
+  </p>
+</div> 
+ -->
+<!-- End the test button -->
+
+
+
+
+
+
+<!-- a test div 
+<div class ="testDiv"> 
+  <p class = "testPara">
+     
+  </p>
+</div> 
+-->
+
+
+<!--END TEST AREA  TEST AREA  TEST AREA  TEST AREA  TEST AREA -->
+  </body>
+
+
+
+  
+</html>
+
