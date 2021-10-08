@@ -75,7 +75,7 @@ This is the <p> that is text
 "Deco library"
 */
 .libHeadText {
-    position: absolute;
+    position: relative;
     left: 10px;
     font-family: 'Limelight', cursive;
     font-size: 54px;
@@ -123,14 +123,13 @@ button
 */
 
 .addPara {
-    position: absolute;
-    left: 10px;
+    position: relative;
+    left: 0px;
     font-family: 'Limelight', cursive;
     font-size: 34px;
-    line-height: 34px;
+    line-height: 50px;
     letter-spacing: 1.25px ;
     color: #ccc;
-
          }
 
 /*
