@@ -303,7 +303,7 @@ let rowInd = this.parentNode.parentNode.rowIndex
 
   // 2) 
 
-  // myLibrary[rowInd-1].cutThisFromArray(myLibrary)
+  myLibrary[rowInd-1].cutThisFromArray(myLibrary)
 //  myLibrary.splice([rowInd-1], 1)
   // 3) 
 makeTableFromLib(myLibrary)
