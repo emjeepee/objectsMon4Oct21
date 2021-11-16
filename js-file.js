@@ -1,3 +1,7 @@
+// NOTE I've called this project objectsMon4Oct21 but it's Odin's Library project
+
+
+
 // The whole of this app's code is in the 
 // following init function:
 const init = () => {
@@ -32,6 +36,40 @@ let myTestLib = [ ]
 // the <tbody> element in the table:
 let tableBody = document.getElementById("tableBody")
 
+//--------
+
+// Now define the Book class using ES6 syntax.
+// Function getAndShowLibOnStartup() uses it soon,
+// hence the clss declaration has to be here as 
+// ES6 classes re not hoisted
+
+// Replacing Book class made with a constructor
+// to ES6 Book class using class syntax:
+// Now the Book class:
+class Book {
+  constructor(title, author, pages, read){
+  this.title = title
+  this.author = author
+  this.pages = pages
+  this.read = read
+                                         } //end constructor
+cutThisFromArray(lib){
+  let counter = 0
+  for (let i = 0; i < lib.length; i++) {
+  if (lib[i] == this) { // 'this' means an instance of Book
+    counter = i
+                      }  // end if
+                                        } // end for
+// Remember that 
+// myArray.splice(2, 2) means 
+// go to position 2, remove 2 items
+// including the one at index [2].
+// splice() changes the array: 
+  lib.splice(counter,1)
+                      } // end method                                        
+             }// end Book class declaration
+
+//---------
 
 // Now get the library out of local storage and 
 // set myLibrary to it:
@@ -59,6 +97,10 @@ dragElement(dialogBoxID)
 // dragElement(formDivID) -- this makes the form inputs fail to work
 
 
+
+
+/* Now not used*/
+/* 
 // Now the Book class:
 function Book(title, author, pages, read){
   this.title = title
@@ -98,9 +140,8 @@ Book.prototype.testMethod2 = function() {
 // splice() changes the array: 
   lib.splice(counter,1)
                                                    } // end fn
-
+Now not used*/
 //-------
-
 
 
 // The following is a global function that 
@@ -132,11 +173,12 @@ function arrayToString(arr) {
 //-------
 // Now an fn that code calls from inside the 
 // "Submit" button's event handler.
-// This fn 
-// 2) Gets rid of a leading space
-// 1) Changes a run of 2 or more spaces
+// This fn removes unnecessary spaces 
+// that the user has typed. It:
+// 1) Gets rid of a leading space
+// 2) Changes a run of 2 or more spaces
 //    into one space.
-// This fn returns an array representing 
+// 3) Returns an array representing 
 // the string it rxed as arg 
 function cutRunOfSpaces(text){
 let myArray = stringToArray(text)
@@ -164,24 +206,20 @@ for (let i = 0; i < myArray.length; i++) {
                                           } // end for
 
 // So myArray1 is now, eg, [" ", "^", "M", "y", " ", "^", "W", "a", "y", "^", "^"]
-// Now remove all "^":
+// Now remove all "^"s:
 for (let j = 0; j < myArray1.length; j++) {
   if (myArray1[j] !== "^") {
     myArray2.push(myArray1[j])
                            } 
                                           } // end for
 
-
-
 // Now remove leading space if there is one:
 if (myArray2[0] === " ") {
-
   myArray2.slice(1)
                         } // end if
-                                                
+
 return myArray2
                              } // end fn
-
 
 
 //-------
@@ -197,8 +235,8 @@ localStorage.clear();
   // strings into local storage
   // as the value part of a 
   // key-value pair. Hence: 
-  let myThingToStore = JSON.stringify(lib)
-  localStorage.setItem("storedLibArray", myThingToStore);
+  let myLibToStore = JSON.stringify(lib)
+  localStorage.setItem("storedLibArray", myLibToStore);
                              } // end fn
 
 //-------
@@ -214,29 +252,29 @@ localStorage.clear();
 function getAndShowLibOnStartup(){
 let bookInst = null
   // Remember that localStorage
-  // accepts strings for storage
-  // (as the value part of a key-value
-  // pair) hence:
-  if (
+  // accepts keys that are strings
+  // and values that are strings
+  // hence:
+  if ( // If the library is in localStorage as 
+    // "storedLibArray" and there is at least 
+    // one Book instance in it:
     localStorage.getItem("storedLibArray") &&
     (JSON.parse(localStorage.getItem("storedLibArray")).length > 0)
-    ) {
-      
-    
-    // const myArray = JSON.parse(myArrayFromLocalStorage)
-    // let thingRetrievedFromStorage = JSON.parse(localStorage.getItem("storedLibArray"))
+     ) {
+    // Get the library out of storage:   
     let thingRetrievedFromStorage = JSON.parse(localStorage.getItem("storedLibArray"))
     
     // Now restore the prototype chain of 
-    // each object in  thingRetrievedFromStorage.
+    // each object in the lretrieved library 
+    // (thingRetrievedFromStorage).
     // But first toast myLibrary:
     myLibrary = []
 for (let i = 0; i < thingRetrievedFromStorage.length; i++) {
   // NOTE: this doesn't work:
   // thingRetrievedFromStorage[i].prototype = Object.create(Book.prototype)
   // maybe because typeof(Book) returns 'function'.
-  // The following may be clunky but it's the only way I know that will 
-  // restore the prototype chain:
+  // This is the only way I know for 
+  // restoring the prototype chain:
     bookInst = new Book(
     thingRetrievedFromStorage[i].title,
     thingRetrievedFromStorage[i].author,
@@ -245,8 +283,6 @@ for (let i = 0; i < thingRetrievedFromStorage.length; i++) {
                       )
                       myLibrary.push(bookInst)
                                                             } // end for
-
-
       }  // end if
 
 // Now put the contents of 
@@ -255,10 +291,7 @@ makeTableFromLib(myLibrary)
 
                                  } // end fn
 
-
-
-
-
+//--------
 
 // Now an fn that puts a book in the library
 // (without first checking whether or not it is 
@@ -271,6 +304,7 @@ function addBookToLibraryTwo(bookInstance, lib) {
   storeLibLocally(lib)
                                                 } // end fn
   
+//--------
 
 // Now an fn that puts a book in library
 // lib without first checking 
@@ -286,25 +320,22 @@ function addBookToLibraryThree(bookInstance, lib) {
 // This div lives in the 6th <td> of every 
 // table row. Code creates this div and gives
 // it its class and sets its event listener 
-// (whose callback this is)
-// dynamically. This div is a button 
-// whose click must remove 
+// (whose callback this is) dynamically. This 
+// div is a button whose click must remove 
 // the appropriate book.
 // The callback must
 // 1) get the rowIndex of the row
 // 2) remove object at rowIndex-1 in myLibrary
 // by calling the appropriate fn that 
 // code defined as part of the Book prototype
-// 3) redraw the table :
+// 3) redraw the table using myLibrary as 
+// the source of he data for the table:
 function removeBookFromTable(){
   // 1) Remember the div (ie 'this') is in a td that is in 
   // a tr, hence use 'parentNode' twice below:
 let rowInd = this.parentNode.parentNode.rowIndex
-
-  // 2) 
-
+  // 2) Remember that myLibrary is an array of Book instances:
   myLibrary[rowInd-1].cutThisFromArray(myLibrary)
-//  myLibrary.splice([rowInd-1], 1)
   // 3) 
 makeTableFromLib(myLibrary)
                               } // end fn
@@ -335,61 +366,28 @@ function getKeys(obj){
 // The callback must
 // 1) get the rowIndex of the row
 // 2) go to the object at that index in myLibrary
-//    and toggle the value of it 'read' property
-// 3) redraw the table :
+//    and toggle the value of its 'read' property
+// 3) redraw the table:
 function toggleReadStatus(){
-
-  // 1) Remember the div is in a td that is in 
-  // a tr
+  // 1) Remember the div is in a td in a tr:
 let rowInd = this.parentNode.parentNode.rowIndex
-// 2)
-if (myLibrary[rowInd-1].read == "No") {
-    myLibrary[rowInd-1].read = "Yes"
-                                    }  else {
-                  myLibrary[rowInd-1].read = "No"
-                                            } // end if-else
-// 3) 
-makeTableFromLib(myLibrary)
-                          } // end fn
-
-
-// Now an event listener callback for the div 
-// (button) of class "remove". This div (button) lives in
-// the 6th <td> of every table row.
-// Code creates this div and gives it its class
-// dynamically. This div is the in-row button 
-// whose click must remove the book in question
-// from the library myLibrary and from the table.
-// The callback must
-// 1) get the rowIndex of the row
-// 2) go to the object at that index in myLibrary
-//    and remove it
-// 3) redraw the table 
-// 4) save array myLibrary to local storage:
-function removeBookFromLib(){
-  
-  // 1)
-  let rowInd = this.parentNode.parentNode.rowIndex
   // 2)
-  myLibrary.splice((rowInd-1), 1);
+  if (myLibrary[rowInd-1].read == "No") {
+    myLibrary[rowInd-1].read = "Yes"
+                                        }  else {
+                  myLibrary[rowInd-1].read = "No"
+                                                } // end if-else
   // 3) 
   makeTableFromLib(myLibrary)
-  // 4)
-  storeLibLocally(myLibrary)
                             } // end fn
-  
 
-
-
-
-
-
-
+//----
 
 // Now a fn that the event handler for 
 // the 'Submit' button calls.
-// This fn must show the books in the library in the table.
-// arg lib will be array of Book instances myLibrary
+// This fn must show in the table the books 
+// that the library contains.
+// arg lib will be myLibrary
 // and tableRef is the var for the ref to the table.
 // This fn has to:
 // 1) Append a <tr> to the <tbody> 
@@ -494,7 +492,12 @@ for (let i = 0; i < arrOfRefsToRemoveDivs.length; i++) {
                                           } // end fn 
 
 //------
-
+/*
+NOTE: keep the following code! It is part of the 
+final project even though it has the word "test"
+in, eg, vars (I never got round to chainging 
+their names!)
+*/
 // Now an event listener for the test button.
 // This puts ten books into library myTestLib
 // and puts myTestLib into local storage:
@@ -534,6 +537,8 @@ storeLibLocally(lib)
                                } // end fn
 
 
+//--------
+
 // Now an event listener for testButton1.
 // This simly clears what's in 
 // local storage:
@@ -552,30 +557,8 @@ Books:
 7) Ernest Hemingway , For Whom the Bell Tolls, 278 pages
 8) J. B. Priestley – Angel Pavement, 324 pages
 9) W. Somerset Maugham – Cakes and Ale, 254 pages
-100 Hermann Hesse, Narcissus and Goldmund, 267pages
+10) Hermann Hesse, Narcissus and Goldmund, 267pages
 */
-
-
-//--------
-/*
-// Now an event listener for testButton2 (the third button):
-testButton2.addEventListener('click', function(){
-// The following works:
-// let myBookInstance = new Book("Title", "Mr Author", 432, "Yes")
-// myBookInstance.testMethod1()
-// The following works too:
-let myTestLib1 = [
-   new Book("Bang", "Batman", 433, "Yes"), 
-   new Book("Thwack", "Robin", 432, "No"),
-   new Book("Wham", "Joker", 431, "Maybe")
-                  ]
-myTestLib1[2].testMethod1("Jesus help me!")
-                                                }) // end
-*/
-
-
-
-
 
 
 //-------
@@ -586,26 +569,33 @@ myTestLib1[2].testMethod1("Jesus help me!")
 // outer panel:
 addButton.addEventListener("click", showForm)
 
-// Now the callback for the event listener above:
+// Now the callback for the event listener above.
+// This fn has to:
+// 1) Make the form visible
 function showForm(){
-// Make the form visible
+// 1) Make the form visible
 // by giving it a specific class:
 document.getElementById('formDivID').classList.remove('formDivVanish');
 document.getElementById('formDivID').classList.add('formDivAppear');
                    } // end showForm
 
+//-------
+
 // Now an event listener for the 
 // clicking of the Close button:
 closeDiv.addEventListener("click", hideForm)
 
-// Now the callback for the event listener above:
+// Now the callback for the event listener above.
+// This callback has to:
+// 1) Make the form vanish
 function hideForm(){
-
-// Make the form vanish
+// 1) Make the form vanish
 // by giving it a specific class:
 document.getElementById('formDivID').classList.remove('formDivAppear');
 document.getElementById('formDivID').classList.add('formDivVanish');
                    } // end showForm
+
+//-------
 
 // Now an event listener for the 
 // clicking of the Submit button:
@@ -696,7 +686,7 @@ makeTableFromLib(myLibrary)
 
 
 // User enters details of a book and
-// hits the "Add to library" button.
+// hits the "Submit" button.
 // The following happens:
 // 1) The button's click event handler 
 // first checks whether the 
@@ -719,12 +709,14 @@ makeTableFromLib(myLibrary)
 
 //--------
 
-// An fn to determine whether a book 
+// Now an fn that hte callback
+// for the Submit button employs.
+// This fn must:
+// 1) determine whether a book 
 // of the given title already exists
-// in a given library. This fn 
-// returns:
-// true -- if book is already in library
-// false -- if book not already in library:
+// in a given library. 
+// 2) return true -- if book is already in library
+// or false -- if book not already in library:
 
 // isBookInLib(myLibrary, bookInst.title, bookInst.author)
 function isBookInLib(lib, title, author){
@@ -741,7 +733,7 @@ for (let i = 0; i < lib.length; i++) {
 return false                                           
                             } // end fn
 
-
+//---------
 
 // Now a function that creates an instance of Book.
 // Code calls this fn when the user clicks the form's
@@ -752,37 +744,9 @@ bookInstance = new Book(title, author, pages, read)
 return bookInstance
                                                 } // end fn createBook
 
-
 // theHobbit = new Book("The Hobbit", "J. R. Tolkien", "365", false)
 
-// Now an fn that makes the dialog box appear:
-function showDialogBox(){
-// Use setTimeout so that 
-// the dialog box appears 
-// for only a few seconds
-
-                        } // end fn
-
-
-// Now an fn that puts the book in the library,
-// first checking whether or not it is 
-// already in there:
-function addBookToLibraryOne(bookInstance) {
-  // First if the book is already in the library
-  // open the appropriate dialog box for 
-  // a short while:
-  if (isBookInLib(bookInstance.title)) {
-    // display dialog box for a while:
-    // call appropriate fn here
-    return
-                                       } else { // if the book is not already in the library
-  // Put the book in the library:
-  myLibrary.push(bookInstance)
-                                              } // end if-else
-                                           } // end fn
-  
-
-//------
+//---------
 
 // Now a fn to make any element dragable:
 // The code for this came from W3 but it's easy to understand:
@@ -824,31 +788,6 @@ function dragElement(elmnt) {
                               }    
 
 //-------------------------------------------------------------------
-
-// Following function was a method of the Book class 
-// and was declared inside the Book constructor but is 
-// not used in this web app:
-/*
-this.info = function (){
-let stringtoReturn = ""
-if (read) {
-  this.textRead = "read"
-           } // end if
-
-if (!read) {
-            this.textRead = "not yet read"
-          } // end if
-
-stringtoReturn = `${this.title} by ${this.author}, ${this.pages} pages, ${this.textRead}.`  
-return stringtoReturn
-                       } // end fn info
-*/
-
-
-
-
-
-
 
 
 

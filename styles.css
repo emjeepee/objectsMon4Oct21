@@ -1,4 +1,11 @@
 /*
+NOTE: I've called this project objectsMon4Oct21 but it's Odin's Library project
+*/
+
+
+
+
+/*
 Structure: 
 1) outerDiv contains everything except the form
 2) tableDiv (child of outerDiv) contains the table
@@ -10,9 +17,13 @@ c) pages
 d) read 
 e) button to remove the book from the library
 f) button to change the read status of the book
-5) the bottom of the table will have a button to
-add a new book to the library.
-This button will call up a form
+5) At the bottom of the table are two buttons:
+i) one to reset local storage so that the 
+library contains ten books from the 1930s. 
+ii) A button to toast local storage completely.
+5) At the top of the table is a button
+that lets the user add a new book. Clicking this 
+button brings up a form
 6) A formDiv that contains 
 a) fields for title, author, pages, read
 b) a button to 
